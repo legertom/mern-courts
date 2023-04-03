@@ -28,6 +28,7 @@ router.use(passport.initialize());
 
 // User registration
 router.post('/register', async (req, res) => {
+  console.log('Received register request:', req.body); // Add this line
   const { username, password } = req.body;
   
   if (!password || typeof password !== 'string') {
@@ -39,6 +40,7 @@ router.post('/register', async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
+    console.log('Error during user registration:', err); // Add this line
     res.status(400).json({ message: err.message });
   }
 });

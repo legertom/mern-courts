@@ -4,6 +4,7 @@ import axios from 'axios';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +14,10 @@ const Register = () => {
         password,
       });
       console.log(response.data);
+      setMessage('User registered successfully!');
     } catch (err) {
       console.error(err);
+      setMessage('Error registereing user. Please try again later.')
     }
   };
 
@@ -36,6 +39,7 @@ const Register = () => {
         />
         <button type="submit">Register</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };
