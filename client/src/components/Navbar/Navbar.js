@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const { isAuthenticated, signOut } = auth;
+  const location = useLocation();
 
   const handleSignOut = () => {
     signOut(navigate);
@@ -25,15 +26,16 @@ const Navbar = () => {
         <Link to="/addCourt" className="nav-item">
           Add Court
         </Link>
-      )}
-      {isAuthenticated ? (
-        <button onClick={handleSignOut} className="nav-item">
+      )} {isAuthenticated ? (
+        <button onClick={signOut} className="nav-item">
           Sign Out
         </button>
       ) : (
-        <Link to="/login" className="nav-item">
-          Log In
-        </Link>
+        !isAuthenticated && location.pathname !== '/login' && (
+          <Link to="/login" className="nav-item">
+            Log In
+          </Link>
+        )
       )}
     </nav>
   );
