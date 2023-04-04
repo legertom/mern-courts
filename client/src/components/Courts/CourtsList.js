@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DeleteCourtButton from './DeleteCourtButton';
-import { useProtectedRoute } from "../../hooks/useProtectedRoute";
+import { AuthContext } from '../../context/AuthContext';
 
 const CourtList = () => {
-  useProtectedRoute();
+
   const [courts, setCourts] = useState([]);
 
   const handleDelete = (courtId) => {
@@ -26,6 +26,15 @@ const CourtList = () => {
     fetchCourts();
   }, []);
 
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext);
+  
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+  
   return (
     <div>
       <h2>Courts</h2>

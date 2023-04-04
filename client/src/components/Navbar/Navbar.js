@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
-import useAuth  from '../../hooks/useAuth';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, signOut } = useAuth();
+  const auth = useContext(AuthContext);
+  const { isAuthenticated, signOut } = auth;
 
+  const handleSignOut = () => {
+    signOut(navigate);
+  }
+  
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-item">
@@ -22,7 +27,7 @@ const Navbar = () => {
         </Link>
       )}
       {isAuthenticated ? (
-        <button onClick={signOut} className="nav-item">
+        <button onClick={handleSignOut} className="nav-item">
           Sign Out
         </button>
       ) : (

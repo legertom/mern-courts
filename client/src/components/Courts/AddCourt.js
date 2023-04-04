@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useProtectedRoute } from "../../hooks/useProtectedRoute";
+
+
 
 const AddCourt = () => {
-  useProtectedRoute();
+
     const [name, setName] = useState("");
     const [surface, setSurface] = useState("");
     const [error, setError] = useState(null);

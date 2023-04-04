@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error , setError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5005/users/login', {username, password});
+      const response = await axios.post("http://localhost:5005/users/login", {
+        username,
+        password,
+      });
 
-      //resplace this with what we want to do
-      console.log('you are logged in!');
-      localStorage.setItem('token', response.data.token);
-    navigate('/courts'); // Redirect to the CourtList page
+      console.log("you are logged in!");
+      localStorage.setItem("token", response.data.token);
+      auth.setIsAuthenticated(true);
 
-    } catch(error) {
+      navigate("/courts"); // Redirect to the CourtList page
+    } catch (error) {
       console.error(error);
-      setError(error.response.data.message || 'An error occured while logging in.');
+      setError(
+        error.response.data.message || "An error occured while logging in."
+      );
     }
   };
 

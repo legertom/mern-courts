@@ -8,6 +8,7 @@ import EditCourt from "./components/Courts/EditCourt";
 import Navbar from "./components/Navbar/Navbar";
 import { AuthProvider } from "./context/AuthContext";
 
+
 function App() {
   return (
     <AuthProvider>

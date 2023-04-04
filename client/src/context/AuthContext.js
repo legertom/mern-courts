@@ -15,9 +15,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const signOut = (navigate) => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    navigate('/login');
+  };
+
   const value = {
     isAuthenticated,
     setIsAuthenticated,
+    signOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
