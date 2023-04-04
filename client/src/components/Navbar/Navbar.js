@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+
 import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOut(navigate);
+   
   }
   
   return (
@@ -26,8 +27,9 @@ const Navbar = () => {
         <Link to="/addCourt" className="nav-item">
           Add Court
         </Link>
-      )} {isAuthenticated ? (
-        <button onClick={signOut} className="nav-item">
+      )}
+      {isAuthenticated ? (
+        <button onClick={handleSignOut} className="nav-item">
           Sign Out
         </button>
       ) : (

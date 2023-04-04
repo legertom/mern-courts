@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/AuthContext';
 const CourtList = () => {
 
   const [courts, setCourts] = useState([]);
+   const [authChecked, setAuthChecked] = useState(false); 
 
   const handleDelete = (courtId) => {
     setCourts(courts.filter((court) => court._id !== courtId));
@@ -30,21 +31,23 @@ const CourtList = () => {
   const { isAuthenticated } = useContext(AuthContext);
   
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && authChecked) {
       navigate('/login');
+    } else {
+      setAuthChecked(true);
     }
-  }, [isAuthenticated, navigate]);
-  
+  }, [isAuthenticated, navigate, authChecked]);
+
   return (
     <div>
       <h2>Courts</h2>
       <ul>
         {courts.map((court) => (
           <li key={court._id}>
-            <h3>{court.name}</h3>
-            <p>{court.surface}</p>
+            <p><span className="court-name">{court.name} </span>
+            ({court.surface})
             <Link to={`/courts/edit/${court._id}`}>Edit</Link>
-            <DeleteCourtButton courtId={court._id} onDelete={handleDelete} />
+            <DeleteCourtButton courtId={court._id} onDelete={handleDelete} /></p>
           </li>
         ))}
       </ul>

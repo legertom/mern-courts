@@ -14,9 +14,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <div>
-          <h1>(App) is rendering!</h1>
-        </div>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

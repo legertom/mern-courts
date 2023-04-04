@@ -1,43 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --primary-color: #3CC47c;
+  --secondary-color: #1E392A;
+  --tertiary-color: #E9C893;
+  --quaternary-color: #828081;
+}
+
 nav {
-    background-color: #333;
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-  }
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: right;
+  padding: 1rem ;
   
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    margin: 0 1rem;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  nav a:hover {
-    color: #ccc;
-  }
-  
-  nav button {
-    background-color: #ff6347;
-    border: none;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-  
-  nav button:hover {
-    background-color: #ff8362;
-  }
-  
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+
+nav li {
+  margin: 0 2rem;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+nav a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  margin-right: 2em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+nav a:hover {
+  text-decoration: none;
+  color: var(--tertiary-color);
+}
+
+nav button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  color: #F1F1F1;
+}
+
+nav button:hover {
+  background-color: var(--tertiary-color);
+}
+
+nav button:active {
+  background-color: var(--quaternary-color);
+}
+

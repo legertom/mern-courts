@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
+import './formStyles.css';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,7 +17,8 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:5005/users/login", {
+      console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL);
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
         username,
         password,
       });
@@ -37,8 +39,9 @@ const Login = () => {
   return (
     <div>
       <h2>Login</h2>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
+      <div className="form-wrapper">
+      <form onSubmit={handleSubmit} className="form-container">
+      <div className="form-error">{error && <p>{error}</p>}</div>
         <label>
           Username:
           <input
@@ -59,6 +62,7 @@ const Login = () => {
         <br />
         <button type="submit">Login</button>
       </form>
+      </div>
     </div>
   );
 };
